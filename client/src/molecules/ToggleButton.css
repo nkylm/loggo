@@ -1,0 +1,24 @@
+.toggleButton {
+	height: 30px;
+	width: 30px;
+	background: transparent;
+	border: none;
+
+	cursor: pointer;
+	padding: 0;
+	box-sizing: border-box;
+	margin-left: 12px;
+	font-size: 25px;
+
+	color: #fff;
+}
+
+.toggleButton:focus {
+	outline: none;
+}
+/* 
+.toggleButton_line {
+  width: 25px;
+  height: 1.5px;
+  background: #336373;
+} */

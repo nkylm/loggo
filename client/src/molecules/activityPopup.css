@@ -1,0 +1,85 @@
+.overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgb(0, 0, 0, 0.5);
+	z-index: 3;
+}
+
+.popup {
+	z-index: 10;
+	background: white;
+	position: absolute;
+	top: calc(50% - 40vh);
+	left: calc(50% - 30vw);
+	width: 60vw;
+	border: 1px #7a7a7a solid;
+}
+
+.popupRow {
+	display: flex;
+	justify-content: space-evenly;
+	padding-top: 3vh;
+}
+
+#activityDropdown {
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1vh;
+}
+
+#notesFieldContainer {
+	flex-direction: column;
+	align-items: center;
+}
+
+#notesFieldContainer p {
+	width: 80%;
+}
+
+.notesField {
+	width: 80%;
+	height: 100%;
+}
+
+.closeIcon {
+	padding: none;
+	background: none;
+	outline: none;
+	border: none;
+	user-select: none;
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+#popupBtns button {
+	border: none;
+	color: white;
+	padding: 15px 48px;
+	border-radius: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+#popupBtns button:hover {
+	filter: brightness(120%) !important;
+}
+
+#popupBtns #save {
+	background: #5e4bf3;
+}
+
+#popupBtns #cancel {
+	background: rgb(179, 0, 0);
+}
+
+.popupRow p {
+	color: #7a7a7a;
+}
