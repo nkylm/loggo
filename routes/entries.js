@@ -13,14 +13,21 @@ router.post("/", (req, res) => {
 
 // Read entries
 router.get("/", (req, res) => {
-	const today = moment(new Date(req.query.date)).utcOffset("-00:00");
+	if (req.query.date == undefined) {
+		var dateQuery = {};
+	} else {
+		var dateQuery = {
+			date: {
+				$gte: req.query.date[0],
+				$lte: req.query.date[1],
+			},
+		};
+	}
 
-	Entry.find({
-		date: {
-			$gte: today.startOf("day").toDate(),
-			$lte: today.endOf("day").toDate(),
-		},
-	})
+	let activityQuery =
+		req.query.activity == undefined ? {} : { activity: req.query.activity };
+
+	Entry.find({ $and: [dateQuery, activityQuery] })
 		.then((entries) => res.json(entries))
 		.catch((err) => console.log(err));
 });

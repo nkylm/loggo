@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
+import moment from "moment";
 import { ThemeContext } from "../themeContext";
-import "./today.css";
+import "./daily.css";
 import { withStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 import editIcon from "../images/edit.svg";
 import deleteIcon from "../images/delete.svg";
@@ -11,7 +12,7 @@ import ActivityPopup from "../molecules/ActivityPopup";
 
 import { createEntry, readEntries, updateEntry, deleteEntry } from "../api";
 
-const Today = () => {
+const Daily = () => {
 	let theme = useContext(ThemeContext);
 	const [openPopup, setOpenPopup] = useState(false);
 	const [editIndex, setEditIndex] = useState();
@@ -41,8 +42,14 @@ const Today = () => {
 	})(Button);
 
 	useEffect(() => {
-		readEntries(date).then((res) => setEntries(res));
-	}, []);
+		const today = moment(new Date(date)).utcOffset("+00:00");
+		readEntries([
+			today.startOf("day").toDate(),
+			today.endOf("day").toDate(),
+		]).then((res) => {
+			setEntries(res);
+		});
+	}, [date]);
 
 	function usePrevious(value) {
 		const ref = useRef();
@@ -57,7 +64,13 @@ const Today = () => {
 			prevEntries &&
 			JSON.stringify(prevEntries) !== JSON.stringify(entries)
 		) {
-			readEntries(date).then((res) => setEntries(res));
+			const today = moment(new Date(date)).utcOffset("+00:00");
+			readEntries([
+				today.startOf("day").toDate(),
+				today.endOf("day").toDate(),
+			]).then((res) => {
+				setEntries(res);
+			});
 		}
 	}, [entries]);
 
@@ -77,6 +90,10 @@ const Today = () => {
 			newEntries.splice(i, 1);
 			setEntries(newEntries);
 		});
+	};
+
+	const handleDateChange = (event) => {
+		setDate(event.target.value);
 	};
 
 	const addEntry = (newEntry) => {
@@ -112,7 +129,7 @@ const Today = () => {
 
 	return (
 		<div
-			className="todayContainer"
+			className="dailyContainer"
 			style={{ backgroundColor: theme.yellow.light }}
 		>
 			{openPopup && (
@@ -122,16 +139,27 @@ const Today = () => {
 						editEntry={editEntry}
 						setOpenPopup={setOpenPopup}
 						entry={editIndex != null ? entries[editIndex] : null}
+						dateProp={date}
 					/>
 				</div>
 			)}
 
 			<AddActivityButton className="addActivityBtn" onClick={handleAdd}>
-				Add Activity
+				Add Event
 			</AddActivityButton>
 
-			<div className="todayDate" style={{ color: theme.blue.dark }}>
-				{date}
+			<div className="dailyDate" style={{ color: theme.blue.dark }}>
+				<TextField
+					id="dateField"
+					type="date"
+					value={moment(new Date(date))
+						.utcOffset("-00:00")
+						.format("yyyy-MM-DD")}
+					onChange={handleDateChange}
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
 			</div>
 
 			<div className="activityList">
@@ -169,4 +197,4 @@ const Today = () => {
 	);
 };
 
-export default Today;
+export default Daily;

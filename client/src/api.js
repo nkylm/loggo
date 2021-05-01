@@ -8,9 +8,9 @@ export const createEntry = (entry) => {
 	});
 };
 
-export const readEntries = (date) => {
+export const readEntries = (date, activity) => {
 	return Axios.get(`${currentDomain}/entries`, {
-		params: { date },
+		params: { date, activity },
 	}).then((res) => {
 		return res.data;
 	});
@@ -30,4 +30,21 @@ export const deleteEntry = (id) => {
 			return res.data;
 		}
 	);
+};
+
+export const uploadFile = (formData, setUploadPercentage) => {
+	return Axios.post(`${currentDomain}/upload`, formData, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+		onUploadProgress: (progressEvent) => {
+			setUploadPercentage(
+				parseInt(
+					Math.round(
+						(progressEvent.loaded * 100) / progressEvent.total
+					)
+				)
+			);
+		},
+	});
 };

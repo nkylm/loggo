@@ -41,26 +41,26 @@ const Nav = () => {
 						<ul>
 							<li className="navbarTabs">
 								<NavLink
-									to="/today"
+									to="/daily"
 									activeStyle={{ color: themes.orange.dark }}
 								>
-									Today
+									Daily
 								</NavLink>
 							</li>
 							<li className="navbarTabs">
 								<NavLink
-									to="/calendar"
+									to="/history"
 									activeStyle={{ color: themes.orange.dark }}
 								>
-									Calendar
+									History
 								</NavLink>
 							</li>
 							<li className="navbarTabs">
 								<NavLink
-									to="/progress"
+									to="/upload"
 									activeStyle={{ color: themes.orange.dark }}
 								>
-									Progress
+									Upload
 								</NavLink>
 							</li>
 						</ul>

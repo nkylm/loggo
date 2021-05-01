@@ -2,7 +2,7 @@
 	margin: 3vh 0;
 }
 
-.todayDate {
+.dailyDate {
 	position: absolute;
 	left: 50%;
 	top: 12%;
@@ -10,7 +10,7 @@
 	font-size: large;
 }
 
-.todayContainer {
+.dailyContainer {
 	margin: 0 10vw;
 }
 

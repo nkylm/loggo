@@ -2,7 +2,9 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Home from "./pages/Home";
-import Today from "./pages/Today";
+import Daily from "./pages/Daily";
+import History from "./pages/History";
+import Upload from "./pages/Upload";
 import Nav from "./molecules/Nav";
 import "./global.css";
 
@@ -13,7 +15,13 @@ function App() {
 		<Router history={history}>
 			<Nav />
 			<Switch>
-				<Route path="/today" component={Today}></Route>
+				<Route path="/daily" component={Daily}></Route>
+			</Switch>
+			<Switch>
+				<Route path="/history" component={History}></Route>
+			</Switch>
+			<Switch>
+				<Route path="/upload" component={Upload}></Route>
 			</Switch>
 		</Router>
 	);

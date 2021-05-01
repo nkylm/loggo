@@ -1,0 +1,17 @@
+.uploadContainer {
+	padding: 0 10vw 0 10vw;
+}
+
+.fileInput {
+	padding-top: 10vh;
+}
+
+.messageContainer {
+	position: absolute;
+	margin-top: 2vh;
+	width: 80vw;
+}
+
+.custom-file-input {
+	cursor: pointer;
+}

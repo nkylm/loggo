@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import moment from "moment";
 import "./activityPopup.css";
 import { ThemeContext } from "../themeContext";
+import { ConstantContext } from "../constantContext";
 
 import {
 	TextField,
@@ -17,13 +18,19 @@ import { withStyles } from "@material-ui/core/styles";
 import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
 
-const ActivityPopup = ({ addEntry, editEntry, setOpenPopup, entry }) => {
+const ActivityPopup = ({
+	addEntry,
+	editEntry,
+	setOpenPopup,
+	entry,
+	dateProp,
+}) => {
 	let theme = useContext(ThemeContext);
+	let constants = useContext(ConstantContext);
 	const [activity, setActivity] = useState("");
 	const [notes, setNotes] = useState("");
 	const [dateTime, setDateTime] = useState(
 		(() => {
-			// "2017-05-24";
 			let newDate = new Date();
 			newDate.setMinutes(
 				newDate.getMinutes() - newDate.getTimezoneOffset()
@@ -31,7 +38,12 @@ const ActivityPopup = ({ addEntry, editEntry, setOpenPopup, entry }) => {
 			let date = newDate.toISOString().split("T");
 			date[1] = date[1].substr(0, 5);
 
-			return [date[0], date[1]];
+			return [
+				moment(new Date(dateProp))
+					.utcOffset("-00:00")
+					.format("yyyy-MM-DD"),
+				date[1],
+			];
 		})()
 	);
 	const [showRequired, setShowRequired] = useState(false);
@@ -113,15 +125,18 @@ const ActivityPopup = ({ addEntry, editEntry, setOpenPopup, entry }) => {
 							displayEmpty
 						>
 							<MenuItem value="" disabled>
-								Activity
+								Event
 							</MenuItem>
-							<MenuItem value={"eat"}>Eat</MenuItem>
-							<MenuItem value={"drink"}>Drink</MenuItem>
-							<MenuItem value={"pee"}>Pee</MenuItem>
-							<MenuItem value={"poop"}>Poop</MenuItem>
-							<MenuItem value={"sleep"}>Sleep</MenuItem>
-							<MenuItem value={"exercise"}>Exercise</MenuItem>
-							<MenuItem value={"treat"}>Treat</MenuItem>
+							{constants.EVENTS.map((event, i) => {
+								return (
+									<MenuItem
+										value={event.toLowerCase()}
+										key={i}
+									>
+										{event}
+									</MenuItem>
+								);
+							})}
 						</Select>
 						{showRequired && (
 							<FormHelperText>Required</FormHelperText>
