@@ -1,29 +1,28 @@
 import React, { useEffect, useRef } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import Axios from "axios";
 import "./SideDrawer.css";
 
-const SideDrawer = ({ sideDrawerOpener }) => {
-	const ref = useRef(null);
+const currentDomain = "http://localhost:3000";
 
-	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (ref.current && !ref.current.contains(event.target)) {
-				sideDrawerOpener(false);
-			}
-		};
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, [ref]);
+const SideDrawer = ({ sideDrawerOpen, setSideDrawerOpen }) => {
+	const { logout } = useAuth0();
 
 	return (
-		<nav className="sidedrawer" ref={ref}>
+		<nav className="sidedrawer">
 			<ul>
 				<li>
-					<a href="/">Action</a>
-				</li>
-				<li>
-					<a href="/">More</a>
+					<button
+						className="logout"
+						onClick={() => {
+							logout({
+								returnTo: `${currentDomain}/login`,
+								client_id: "oBVOt49DbmVeyo07kAZ11hay3GxPqYT1",
+							});
+						}}
+					>
+						Logout
+					</button>
 				</li>
 			</ul>
 		</nav>

@@ -3,7 +3,6 @@ import moment from "moment";
 import "./activityPopup.css";
 import { ThemeContext } from "../themeContext";
 import { ConstantContext } from "../constantContext";
-
 import {
 	TextField,
 	Button,
@@ -17,6 +16,7 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ActivityPopup = ({
 	addEntry,
@@ -47,6 +47,8 @@ const ActivityPopup = ({
 		})()
 	);
 	const [showRequired, setShowRequired] = useState(false);
+
+	const { user } = useAuth0();
 
 	const SaveButton = withStyles({
 		root: {
@@ -84,6 +86,7 @@ const ActivityPopup = ({
 				notes,
 				date: dateTime[0],
 				time: dateTime[1],
+				email: user.email,
 			};
 			if (entry != null) {
 				editEntry(newEntry);

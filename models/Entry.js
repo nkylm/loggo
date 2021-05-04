@@ -6,6 +6,7 @@ const entrySchema = new Schema({
 	notes: String,
 	date: Date,
 	time: String,
+	email: String,
 });
 
 module.exports = Entry = mongoose.model("entries", entrySchema);

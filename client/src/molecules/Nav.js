@@ -6,9 +6,11 @@ import { NavLink, useLocation } from "react-router-dom";
 import SideDrawer from "./SideDrawer";
 import NavDropdown from "./NavDropdown";
 
+import Logo from "../images/logo.png";
+
 const Nav = () => {
 	let themes = useContext(ThemeContext);
-	const [sideDrawerOpen, setSideDrawerOpen] = useState();
+	const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 	const [color, setColor] = useState();
 	const location = useLocation();
 
@@ -23,7 +25,10 @@ const Nav = () => {
 	return (
 		<div>
 			{sideDrawerOpen && (
-				<SideDrawer sideDrawerOpener={setSideDrawerOpen} />
+				<SideDrawer
+					sideDrawerOpen={sideDrawerOpen}
+					setSideDrawerOpen={setSideDrawerOpen}
+				/>
 			)}
 
 			<header className="toolbar">
@@ -32,9 +37,7 @@ const Nav = () => {
 					style={{ background: themes.blue.dark }}
 				>
 					<div>
-						{/* <a href="/">
-							<img src={Logo} alt="Logo" />
-						</a> */}
+						<img id="navLogo" src={Logo} alt="Logo" />
 					</div>
 					<div className="space" />
 					<div className="toolbar_navItems">

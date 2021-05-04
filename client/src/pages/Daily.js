@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import moment from "moment";
 import { ThemeContext } from "../themeContext";
 import "./daily.css";
@@ -22,8 +23,9 @@ const Daily = () => {
 		})()
 	);
 	const [entries, setEntries] = useState([]);
-
 	const prevEntries = usePrevious(entries);
+
+	const { user } = useAuth0();
 
 	const AddActivityButton = withStyles({
 		root: {
@@ -43,10 +45,11 @@ const Daily = () => {
 
 	useEffect(() => {
 		const today = moment(new Date(date)).utcOffset("+00:00");
-		readEntries([
-			today.startOf("day").toDate(),
-			today.endOf("day").toDate(),
-		]).then((res) => {
+		readEntries(
+			[today.startOf("day").toDate(), today.endOf("day").toDate()],
+			null,
+			user.email
+		).then((res) => {
 			setEntries(res);
 		});
 	}, [date]);
@@ -60,18 +63,23 @@ const Daily = () => {
 	}
 
 	useEffect(() => {
+		let isMounted = true;
 		if (
 			prevEntries &&
 			JSON.stringify(prevEntries) !== JSON.stringify(entries)
 		) {
 			const today = moment(new Date(date)).utcOffset("+00:00");
-			readEntries([
-				today.startOf("day").toDate(),
-				today.endOf("day").toDate(),
-			]).then((res) => {
-				setEntries(res);
+			readEntries(
+				[today.startOf("day").toDate(), today.endOf("day").toDate()],
+				null,
+				user.email
+			).then((res) => {
+				if (isMounted) setEntries(res);
 			});
 		}
+		return () => {
+			isMounted = false;
+		};
 	}, [entries]);
 
 	const handleAdd = () => {

@@ -8,9 +8,9 @@ export const createEntry = (entry) => {
 	});
 };
 
-export const readEntries = (date, activity) => {
+export const readEntries = (date, activity, email) => {
 	return Axios.get(`${currentDomain}/entries`, {
-		params: { date, activity },
+		params: { date, activity, email },
 	}).then((res) => {
 		return res.data;
 	});
@@ -45,6 +45,23 @@ export const uploadFile = (formData, setUploadPercentage) => {
 					)
 				)
 			);
+			setTimeout(() => {
+				setUploadPercentage(0);
+			}, 5000);
 		},
 	});
+};
+
+export const deleteCollection = (email) => {
+	return Axios.delete(`${currentDomain}/entries/deleteCollection`, {
+		params: { email },
+	});
+};
+
+export const addCollection = (newData) => {
+	return Axios.post(`${currentDomain}/entries/addCollection`, { newData });
+};
+
+export const deleteFile = (filePath) => {
+	Axios.delete(`${currentDomain}/upload`, { params: { filePath } });
 };

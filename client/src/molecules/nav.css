@@ -70,3 +70,8 @@ a img {
 .toolbar_navItems a:target {
 	color: rgb(190, 190, 190);
 }
+
+#navLogo {
+	height: 40px;
+	margin-left: 20px;
+}

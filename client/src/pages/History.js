@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import moment from "moment";
 import ReactDOM from "react-dom";
 import Chart from "react-apexcharts";
@@ -52,6 +53,8 @@ const TIMES = [
 const History = () => {
 	let theme = useContext(ThemeContext);
 	let constants = useContext(ConstantContext);
+
+	const { user } = useAuth0();
 
 	const [series, setSeries] = useState([]);
 	const [activity, setActivity] = useState("");
@@ -186,29 +189,39 @@ const History = () => {
 	useEffect(() => {
 		let startDay = moment(startDate)
 			.utcOffset("-04:00")
+			.add(-1, "days")
 			.startOf("day")
+
 			.toDate();
-		let endDay = moment(endDate).utcOffset("-04:00").endOf("day").toDate();
+		let endDay = moment(endDate)
+			.utcOffset("-04:00")
+			.add(-1, "days")
+			.endOf("day")
+			.toDate();
 		startDay > endDay ? setDateError(true) : setDateError(false);
 
-		readEntries([startDay, endDay], activity).then((entries) => {
-			let newSeries = [];
-			for (let i = 0; i < WEEKDAYS.length; i++) {
-				newSeries.push({ name: WEEKDAYS[i], data: [] });
-				for (let j = 0; j < 24; j++) {
-					newSeries[i].data.push({ x: TIMES[j], y: 0 });
+		readEntries([startDay, endDay], activity, user.email).then(
+			(entries) => {
+				let newSeries = [];
+				for (let i = 0; i < WEEKDAYS.length; i++) {
+					newSeries.push({ name: WEEKDAYS[i], data: [] });
+					for (let j = 0; j < 24; j++) {
+						newSeries[i].data.push({ x: TIMES[j], y: 0 });
+					}
 				}
+				entries.forEach((entry, i) => {
+					let entryDate = new Date(entry.date);
+
+					newSeries[
+						WEEKDAYS.indexOf(
+							entryDate.toUTCString().substring(0, 3)
+						)
+					].data[entry.time.split(":")[0] - 0].y++;
+				});
+
+				setSeries(newSeries);
 			}
-			entries.forEach((entry, i) => {
-				let entryDate = new Date(entry.date);
-
-				newSeries[
-					WEEKDAYS.indexOf(entryDate.toUTCString().substring(0, 3))
-				].data[entry.time.split(":")[0] - 0].y++;
-			});
-
-			setSeries(newSeries);
-		});
+		);
 	}, [activity, startDate, endDate]);
 
 	return (

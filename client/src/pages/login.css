@@ -1,0 +1,50 @@
+.background {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background: #f2cc8f;
+}
+
+.logo {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	user-select: none;
+	/* Fade in */
+	animation: fadeIn ease 4s;
+	-webkit-animation: fadeIn ease 4s;
+	-moz-animation: fadeIn ease 4s;
+	-o-animation: fadeIn ease 4s;
+	-ms-animation: fadeIn ease 4s;
+}
+
+.logIn {
+	top: 15px;
+	right: 15px;
+	position: absolute;
+	user-select: none;
+	cursor: pointer;
+	border-style: solid;
+	border-color: #e07a5f;
+	color: #e07a5f;
+	padding: 8px 26px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: transparent;
+	outline: none;
+}
+
+.logIn:hover {
+	background-color: #e07a5f;
+	color: white;
+	border-color: #e07a5f;
+	outline: none;
+}

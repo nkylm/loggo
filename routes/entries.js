@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
 	let activityQuery =
 		req.query.activity == undefined ? {} : { activity: req.query.activity };
 
-	Entry.find({ $and: [dateQuery, activityQuery] })
+	Entry.find({ $and: [dateQuery, activityQuery, { email: req.query.email }] })
 		.then((entries) => res.json(entries))
 		.catch((err) => console.log(err));
 });
@@ -47,6 +47,29 @@ router.delete("/", (req, res) => {
 		.then((deletedEntry) => {
 			res.json(deletedEntry);
 		})
+		.catch((err) => console.log(err));
+});
+
+// Delete collection
+router.delete("/deleteCollection", (req, res) => {
+	Entry.deleteMany({ email: req.query.email })
+		.then((result) =>
+			res.json({
+				msg: `Successfully deleted ${result.deletedCount} documents`,
+			})
+		)
+		.catch((err) => console.log(err));
+});
+
+// Add multiple entries to collection
+router.post("/addCollection", (req, res) => {
+	// lowercase all activities
+	req.body.newData.forEach((data) => {
+		data.activity = data.activity.toLowerCase();
+	});
+
+	Entry.insertMany(req.body.newData)
+		.then((insertedEntries) => res.json(insertedEntries))
 		.catch((err) => console.log(err));
 });
 

@@ -1,5 +1,5 @@
 .uploadContainer {
-	padding: 0 10vw 0 10vw;
+	padding: 3vh 10vw 0 10vw;
 }
 
 .fileInput {
@@ -14,4 +14,20 @@
 
 .custom-file-input {
 	cursor: pointer;
+}
+
+.dataButtonContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.templateContainer {
+	display: flex;
+	margin-top: 8vh;
+	align-items: center;
+	justify-content: space-around;
+}
+
+#templateText {
+	font-size: larger;
 }

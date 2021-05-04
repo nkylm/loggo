@@ -1,0 +1,31 @@
+.loading {
+	width: 100%;
+	height: 100%;
+	background: #f4f1de;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.loader {
+	border: 8px solid #f3f3f3;
+	border-top: 8px solid #e07a5f;
+	border-radius: 50%;
+	width: 5vw;
+	height: 5vw;
+	animation: spin 2s linear infinite;
+	position: absolute;
+	top: 50%;
+	margin-top: -2.5vw;
+	left: 50%;
+	margin-left: -2.5vw;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

@@ -1,10 +1,10 @@
 .sidedrawer {
-	height: 200px;
+	height: 100px;
 	background: #ebecec;
 	position: fixed;
 	top: 56px;
 	padding-bottom: 5px;
-	right: 5px;
+	right: 0px;
 	left: padding;
 	width: 150px;
 	max-width: 700px;
@@ -14,10 +14,6 @@
 .sidedrawer ul {
 	height: 100%;
 	list-style: none;
-	display: flex;
-	text-align: center;
-	flex-direction: column;
-	justify-content: center;
 }
 
 .sidedrawer li {
@@ -36,8 +32,6 @@
 }
 
 .logout {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 	user-select: none;
 	cursor: pointer;
 	border-style: solid;

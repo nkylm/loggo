@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const router = express.Router();
+const XLSX = require("xlsx");
+const fs = require("fs");
 
 router.post("/", (req, res) => {
 	if (req.files === null) {
@@ -8,9 +10,14 @@ router.post("/", (req, res) => {
 	}
 
 	const file = req.files.file;
+	let convertedFile = XLSX.read(file.data);
+	const convertedFileName = convertedFile.SheetNames[0];
+	const convertedFileSheet = convertedFile.Sheets[convertedFileName];
+	const data = XLSX.utils.sheet_to_json(convertedFileSheet);
 
-	file.mv(
+	fs.writeFile(
 		`${path.join(__dirname, "../")}/client/public/uploads/${file.name}`,
+		JSON.stringify(data),
 		(err) => {
 			if (err) {
 				console.log(err);
@@ -22,6 +29,13 @@ router.post("/", (req, res) => {
 				filePath: `/uploads/${file.name}`,
 			});
 		}
+	);
+});
+
+router.delete("/", (req, res) => {
+	fs.unlink(
+		`${path.join(__dirname, "../")}/client/public/${req.query.filePath}`,
+		(err) => console.log(err)
 	);
 });
 
