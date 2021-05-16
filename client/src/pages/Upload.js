@@ -140,12 +140,14 @@ const Upload = ({
 			// console.log(req);
 			// let uploadedFileData = JSON.parse(req.responseText);
 			let uploadedFileData;
-			fetch(`/app/${uploadedFile.filePath}`)
-				.then((response) => response.json())
-				.then((data) => {
-					console.log(data);
-					uploadedFileData = data;
-				});
+			fetch(`/app/${uploadedFile.filePath}`).then((response) => {
+				console.log(response);
+				response.json();
+			});
+			// .then((data) => {
+			// 	console.log(data);
+			// 	uploadedFileData = data;
+			// });
 			uploadedFileData.forEach((entry) => {
 				let newEntry = {};
 				// format fileData dates
