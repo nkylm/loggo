@@ -15,28 +15,21 @@ router.post("/", (req, res) => {
 	const convertedFileSheet = convertedFile.Sheets[convertedFileName];
 	const data = XLSX.utils.sheet_to_json(convertedFileSheet);
 
-	fs.writeFile(
-		`${path.join(__dirname, "../")}/client/build/uploads/${file.name}`,
-		JSON.stringify(data),
-		(err) => {
-			if (err) {
-				console.log(err);
-				return res.status(500).send(err);
-			}
-
-			res.json({
-				fileName: file.name,
-				filePath: `/uploads/${file.name}`,
-			});
+	fs.writeFile(`tmp/${file.name}`, JSON.stringify(data), (err) => {
+		if (err) {
+			console.log(err);
+			return res.status(500).send(err);
 		}
-	);
+
+		res.json({
+			fileName: file.name,
+			filePath: `/tmp/${file.name}`,
+		});
+	});
 });
 
 router.delete("/", (req, res) => {
-	fs.unlink(
-		`${path.join(__dirname, "../")}/client/public/${req.query.filePath}`,
-		(err) => console.log(err)
-	);
+	fs.unlink(`${req.query.filePath}`, (err) => console.log(err));
 });
 
 module.exports = router;
