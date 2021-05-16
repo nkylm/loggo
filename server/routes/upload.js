@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
 	const convertedFileSheet = convertedFile.Sheets[convertedFileName];
 	const data = XLSX.utils.sheet_to_json(convertedFileSheet);
 
-	fs.writeFile(`/app/tmp/${file.name}`, JSON.stringify(data), (err) => {
+	fs.writeFile(`${file.name}`, JSON.stringify(data), (err) => {
 		if (err) {
 			console.log(err);
 			return res.status(500).send(err);
