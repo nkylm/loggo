@@ -29,7 +29,7 @@ mongoose
 app.use("/entries", entries);
 app.use("/upload", upload);
 
-app.get("/", (req, res) => {
+app.get("/test123", (req, res) => {
 	res.send("Hello from express");
 });
 
