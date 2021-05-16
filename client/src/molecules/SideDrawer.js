@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Axios from "axios";
 import "./SideDrawer.css";
 
-const currentDomain = "http://localhost:3000";
+const currentDomain = "https://loggo.netlify.app";
 
 const SideDrawer = ({ sideDrawerOpen, setSideDrawerOpen }) => {
 	const { logout } = useAuth0();

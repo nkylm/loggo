@@ -4,7 +4,7 @@ import App from "./App";
 
 import { Auth0Provider } from "@auth0/auth0-react";
 
-const currentDomain = "http://localhost:3000";
+const currentDomain = "https://loggo.netlify.app";
 
 ReactDOM.render(
 	<Auth0Provider
