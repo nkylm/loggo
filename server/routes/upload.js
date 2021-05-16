@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
 	const data = XLSX.utils.sheet_to_json(convertedFileSheet);
 
 	fs.writeFile(
-		`${path.join(__dirname, "../")}/client/public/uploads/${file.name}`,
+		`${path.join(__dirname, "../")}/client/build/uploads/${file.name}`,
 		JSON.stringify(data),
 		(err) => {
 			if (err) {
