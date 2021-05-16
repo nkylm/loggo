@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-let currentDomain = "https://loggo.herokuapp.com/";
+let currentDomain = "https://loggo.herokuapp.com";
 
 export const createEntry = (entry) => {
 	return Axios.post(`${currentDomain}/entries`, { entry }).then((res) => {
