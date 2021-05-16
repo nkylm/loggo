@@ -16,7 +16,7 @@ const SideDrawer = ({ sideDrawerOpen, setSideDrawerOpen }) => {
 						className="logout"
 						onClick={() => {
 							logout({
-								returnTo: `${currentDomain}/login`,
+								returnTo: `${currentDomain}`,
 								client_id: "oBVOt49DbmVeyo07kAZ11hay3GxPqYT1",
 							});
 						}}

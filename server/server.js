@@ -29,4 +29,8 @@ mongoose
 app.use("/entries", entries);
 app.use("/upload", upload);
 
+app.get("/", (req, res) => {
+	res.send("Hello from express");
+});
+
 app.listen(port, () => console.log(`Server started on port ${port}`));

@@ -31,12 +31,13 @@ function App() {
 	return (
 		<Router history={history}>
 			<Switch>
-				<Route path="/login" component={Login} />
+				<Route exact path="/" component={Login} />
 				<>
 					<Nav />
-					<ProtectedRoute path="/daily" component={Daily} />
-					<ProtectedRoute path="/history" component={History} />
+					<ProtectedRoute exact path="/daily" component={Daily} />
+					<ProtectedRoute exact path="/history" component={History} />
 					<Route
+						exact
 						path="/upload"
 						render={(props) => (
 							<Upload
