@@ -140,11 +140,10 @@ const Upload = ({
 				},
 			})
 				.then((res) => {
-					console.log(res.body);
-					return res;
+					res.json();
 				})
-				.then((json) => {
-					console.log(json);
+				.then((data) => {
+					console.log(data);
 					uploadedFileData = json;
 				});
 
