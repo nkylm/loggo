@@ -140,7 +140,8 @@ const Upload = ({
 				},
 			})
 				.then((res) => {
-					res.json();
+					console.log(res.json());
+					return res.json();
 				})
 				.then((data) => {
 					console.log(data);
