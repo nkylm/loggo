@@ -133,7 +133,7 @@ const Upload = ({
 		let isMounted = true;
 		if (Object.keys(uploadedFile).length != 0) {
 			let req = new XMLHttpRequest();
-			req.open("GET", `../../${uploadedFile.filePath}`, false);
+			req.open("GET", `/app/${uploadedFile.filePath}`, false);
 			req.send(null);
 
 			let formattedFileData = [];
