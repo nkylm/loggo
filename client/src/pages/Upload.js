@@ -137,6 +137,7 @@ const Upload = ({
 			req.send(null);
 
 			let formattedFileData = [];
+			console.log(req.responseText);
 			let uploadedFileData = JSON.parse(req.responseText);
 			uploadedFileData.forEach((entry) => {
 				let newEntry = {};
