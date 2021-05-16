@@ -12,7 +12,8 @@
 		"express": "^4.17.1",
 		"express-fileupload": "^1.2.1",
 		"moment": "^2.29.1",
-		"mongoose": "^5.12.5"
+		"mongoose": "^5.12.5",
+		"xlsx": "^0.17.0"
 	},
 	"scripts": {
 		"client-install": "npm install --prefix client",
