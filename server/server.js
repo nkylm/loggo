@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const config = require("config");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+require("dotenv").config();
 
 const entries = require("./routes/entries");
 const upload = require("./routes/upload");
@@ -14,7 +14,9 @@ app.use(fileUpload());
 
 const port = process.env.PORT || 5000;
 
-const db = config.get("mongoURI");
+const db = process.env.MONGO_URI;
+
+console.log(process.env.MONGO_URI);
 
 mongoose
 	.connect(db, {
@@ -30,7 +32,7 @@ app.use("/entries", entries);
 app.use("/upload", upload);
 
 app.get("/", (req, res) => {
-	res.send("Hello from express");
+	res.send(process.env.PORT + " this is the port");
 });
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
