@@ -132,22 +132,13 @@ const Upload = ({
 	useEffect(() => {
 		let isMounted = true;
 		if (Object.keys(uploadedFile).length != 0) {
-			let uploadedFileData;
-			fetch(`${uploadedFile.filePath}`, {
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-			})
-				.then((res) => {
-					console.log(res.json());
-					return res.json();
-				})
-				.then((data) => {
-					console.log(data);
-					uploadedFileData = data;
-				});
+			let req = new XMLHttpRequest();
+			req.open("GET", `${uploadedFile.filePath}`, false);
+			req.send(null);
 
+			let formattedFileData = [];
+			console.log(req);
+			let uploadedFileData = JSON.parse(req.responseText);
 			uploadedFileData.forEach((entry) => {
 				let newEntry = {};
 				// format fileData dates
