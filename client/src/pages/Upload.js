@@ -144,7 +144,7 @@ const Upload = ({
 				})
 				.then((data) => {
 					console.log(data);
-					uploadedFileData = json;
+					uploadedFileData = data;
 				});
 
 			uploadedFileData.forEach((entry) => {
