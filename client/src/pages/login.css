@@ -23,15 +23,11 @@
 	-ms-animation: fadeIn ease 4s;
 }
 
-.logIn {
-	top: 15px;
-	right: 15px;
-	position: absolute;
+.loginBtnContainer button {
 	user-select: none;
 	cursor: pointer;
 	border-style: solid;
-	border-color: #e07a5f;
-	color: #e07a5f;
+
 	padding: 8px 26px;
 	text-align: center;
 	text-decoration: none;
@@ -42,9 +38,35 @@
 	outline: none;
 }
 
+.loginBtnContainer {
+	top: 15px;
+	right: 15px;
+	position: absolute;
+	width: 10vw;
+	display: flex;
+	justify-content: space-between;
+}
+
+.logIn {
+	border-color: #e07a5f;
+	color: #e07a5f;
+}
+
 .logIn:hover {
 	background-color: #e07a5f;
 	color: white;
 	border-color: #e07a5f;
+	outline: none;
+}
+
+.gitHub {
+	border-color: #81b29a;
+	color: #81b29a;
+}
+
+.gitHub:hover {
+	background-color: #81b29a;
+	color: white;
+	border-color: #81b29a;
 	outline: none;
 }

@@ -7,7 +7,18 @@ const Login = () => {
 	return (
 		<div className="background">
 			<img src={Logo} className="logo" />
-			<LoginButton />
+			<div className="loginBtnContainer">
+				<button
+					className="gitHub btn btn-secondary btn-lg"
+					onClick={(e) => {
+						e.preventDefault();
+						window.open("https://github.com/nkylm/loggo", "_blank");
+					}}
+				>
+					GitHub
+				</button>
+				<LoginButton />
+			</div>
 		</div>
 	);
 };
