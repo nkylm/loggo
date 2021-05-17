@@ -17,6 +17,7 @@ const port = process.env.PORT || 5000;
 
 const db = process.env.MONGO_URI;
 
+console.log(db);
 mongoose
 	.connect(db, {
 		useUnifiedTopology: true,
