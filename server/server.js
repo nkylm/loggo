@@ -17,7 +17,6 @@ const port = process.env.PORT || 5000;
 
 const db = process.env.MONGO_URI;
 
-console.log(db);
 mongoose
 	.connect(db, {
 		useUnifiedTopology: true,
@@ -30,9 +29,5 @@ mongoose
 
 app.use("/entries", entries);
 app.use("/upload", upload);
-
-app.get("/", (req, res) => {
-	res.send(process.env.MONGO_URI + " this is the mongo");
-});
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
