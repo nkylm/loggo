@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import Home from "./pages/Home";
 import Daily from "./pages/Daily";
 import History from "./pages/History";
 import Upload from "./pages/Upload";
