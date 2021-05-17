@@ -61,7 +61,3 @@ export const deleteCollection = (email) => {
 export const addCollection = (newData) => {
 	return Axios.post(`${currentDomain}/entries/addCollection`, { newData });
 };
-
-export const deleteFile = (filePath) => {
-	Axios.delete(`${currentDomain}/upload`, { params: { filePath } });
-};

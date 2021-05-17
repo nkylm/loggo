@@ -5,12 +5,7 @@ import XLSX from "xlsx";
 import { Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import GetAppIcon from "@material-ui/icons/GetApp";
-import {
-	uploadFile,
-	deleteCollection,
-	addCollection,
-	deleteFile,
-} from "../api";
+import { uploadFile, deleteCollection, addCollection } from "../api";
 import Message from "../molecules/Message";
 import Progress from "../molecules/Progress";
 import Loading from "../molecules/Loading";
@@ -19,7 +14,6 @@ import TemplatePreview from "../images/Log Template Preview.png";
 
 import { ThemeContext } from "../themeContext";
 import "./upload.css";
-import { GetApp } from "@material-ui/icons";
 
 const Upload = ({
 	file,
@@ -105,8 +99,8 @@ const Upload = ({
 
 		uploadFile(formData, setUploadPercentage)
 			.then((res) => {
-				const { fileName, filePath } = res.data;
-				setUploadedFile({ fileName, filePath });
+				const { fileName, data } = res.data;
+				setUploadedFile({ fileName, data });
 				setMessage("File uploaded successfully.");
 				setStatus(200);
 			})
@@ -132,13 +126,12 @@ const Upload = ({
 	useEffect(() => {
 		let isMounted = true;
 		if (Object.keys(uploadedFile).length != 0) {
-			let req = new XMLHttpRequest();
-			req.open("GET", `${uploadedFile.filePath}`, false);
-			req.send(null);
+			// let req = new XMLHttpRequest();
+			// req.open("GET", `${uploadedFile.filePath}`, false);
+			// req.send(null);
 
-			let formattedFileData = [];
-			console.log(req.responseText);
-			let uploadedFileData = JSON.parse(req.responseText);
+			// console.log(req.responseText);
+			// let uploadedFileData = JSON.parse(req.responseText);
 			// let uploadedFileData;
 			// fetch(`${uploadedFile.filePath}`)
 			// 	.then((response) => {
@@ -150,6 +143,8 @@ const Upload = ({
 			// // 	console.log(data);
 			// // 	uploadedFileData = data;
 			// // });
+			let formattedFileData = [];
+			let uploadedFileData = uploadedFile.data;
 			uploadedFileData.forEach((entry) => {
 				let newEntry = {};
 				// format fileData dates
@@ -177,7 +172,6 @@ const Upload = ({
 		deleteCollection(user.email).then((res) => {
 			addCollection(fileData);
 		});
-		deleteFile(uploadedFile.filePath);
 		setFile("");
 		setFileName("Choose .xls or .xslx file");
 		setUploadedFile({});
@@ -186,7 +180,6 @@ const Upload = ({
 
 	const handleUpdateData = () => {
 		addCollection(fileData);
-		deleteFile(uploadedFile.filePath);
 		setFile("");
 		setFileName("Choose .xls or .xslx file");
 		setUploadedFile({});
